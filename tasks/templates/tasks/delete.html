@@ -1,0 +1,17 @@
+<style>
+	body{
+		text-align:center;
+		background-color:#f0dc00;
+		overflow-wrap: break-word;
+
+	}
+   
+</style>
+<span style="">Are you sure you want to delete "{{item}}"?</span> <br>
+<a  href="{% url 'list' %}" ><button style="position:relative;top:20.5px;right:20px;">Cancel</button></a>
+<div style="position:relative;right:-50px;">
+<form method="POST" action="" style="">
+	{% csrf_token %}
+	<input type="submit" name="Confirm" value="delete" style="background-color:red">
+</form>
+</div>

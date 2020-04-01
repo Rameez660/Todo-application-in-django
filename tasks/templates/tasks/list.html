@@ -1,0 +1,166 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% comment %} this for back to top {% endcomment %}
+<script src="https://kit.fontawesome.com/a54d2cbf95.js"></script>
+<style>
+{% comment %} this for back to top {% endcomment %}
+* {
+  margin:0;
+  padding:0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  height:75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Raleway", sans-serif;
+  font-size: 32px;
+  text-transform: uppercase;
+  letter-spacing: 8px;
+}
+
+.section1 {
+  background: #f0932b;
+}
+
+.section2 {
+  background: #eb4d4b;
+}
+
+.section3 {
+  background: #7ed6df;
+}
+
+.section4 {
+  background: #22a6b3;
+}
+
+.to-top {
+  background: white;
+  position: fixed;
+  bottom: 16px;
+  right:32px;
+  width:50px;
+  height:50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size:32px;
+  color:#1f1f1f;
+  text-decoration: none;
+  opacity:0;
+  pointer-events: none;
+  transition: all .4s;
+}
+
+.to-top.active {
+  bottom:32px;
+  pointer-events: auto;
+  opacity:1;
+}
+{% comment %}  {% endcomment %}
+
+
+
+
+	body{
+		background-color: #f0dc00;
+	}
+
+	input{
+		width: 100%;
+		padding: 12px 20px;
+		margin: 8px 0;
+		box-sizing: border-box;
+	}
+
+	input::placeholder {
+	  color: #d3d3d3;
+	}
+
+	.submit{
+		background-color: #6BA3E8;
+	}
+
+	.center-column{
+		width:100%;
+		margin: 20px auto;
+		padding:20px;
+		background-color: #fff;
+		border-radius: 3px;
+		box-shadow: 6px 2px 30px 0px rgba(0,0,0,0.75);
+	}
+
+	.item-row{
+		overflow-wrap: break-word;
+		background-color: #906abd;
+		margin: 10px;
+		padding: 20px;
+		border-radius: 3px;
+		color: #fff;
+		font-size: 16px;
+		box-shadow: 0px -1px 10px -4px rgba(0,0,0,0.75);
+	}
+
+	.btn-danger{
+		background-color: #ffae19;
+		border-color: #e59400;
+	}
+
+</style>
+
+{% for message in messages %}
+<div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+  <strong>Message : </strong> {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+  {% endfor %}
+       <a class="" href="{% url 'handlelogout' %}"><button style="background-color:blue;color:white">logout</button></a>
+
+	<form method="POST" action="/">
+		{% csrf_token %}
+		{{form.title}}
+		<input class="btn btn-info" type="submit" name="Create Task">
+	</form>
+
+	<div class="todo-list">
+
+	{% for task in tasks %}
+		<div class="item-row">
+			<a class="btn btn-sm btn-info" href="{% url 'update_task' task.id %}">Update</a>
+			<a class="btn btn-sm btn-danger" href="{% url 'delete' task.id %}">Delete</a>
+			<a class="btn btn-sm btn-primary" href="{% url 'print' task.id %}">Print</a>
+			{% if task.complete == True %}
+			<div><strike>{{task.title}}</strike></div>
+			{% else %}
+			<div>{{task.title}}</div>
+			{% endif %}
+		</div>
+	{% endfor %}
+	</div>
+</div>
+
+{% comment %} this for back to top {% endcomment %}
+
+  <a href="#" class="to-top">
+    <i class="fas fa-chevron-up"></i>
+  </a>
+
+    <script>
+	const toTop = document.querySelector(".to-top");
+	window.addEventListener("scroll", () => {
+  	if (window.pageYOffset > 100) {
+    	toTop.classList.add("active");
+  	} else {
+    	toTop.classList.remove("active");
+  	}
+	})
+	</script>
+	{% comment %}  {% endcomment %}

@@ -1,0 +1,16 @@
+<style>
+	body{
+		background-color:#f0dc00
+	}
+</style>
+<h1 style="text-align:center">Update Task</h1>
+
+<form method="POST" action="" style="position:relative;right:-660px">
+	{% csrf_token %}
+
+	{{form.title}}
+	<br><br>
+	<input type="submit" name="Update Task" value="update">
+	
+	
+</form>
